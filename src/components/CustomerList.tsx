@@ -6,6 +6,7 @@ import type { Customer } from "../types";
 import { deleteCustomer, getCustomers } from "../customerapi";
 import Addcustomer from "./AddCustomer";
 import { TextField } from "@mui/material";
+import EditCustomer from "./EditCustomer";
 
 function Customerlist() {
   const [customers, setCustomers] = useState<Customer[]>([]);
@@ -67,6 +68,14 @@ function Customerlist() {
           Delete
         </Button>
     },
+    {
+      headerName: "",
+      sortable: false,
+      filterable: false,
+      field: '_links.customer.href',
+      renderCell: (params: GridRenderCellParams) =>
+        <EditCustomer fetchCustomer={fetchCustomers} customerRow={params.row} />
+    }
   ]
 
 	return (
