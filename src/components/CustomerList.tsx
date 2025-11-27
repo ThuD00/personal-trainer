@@ -4,15 +4,23 @@ import type { GridColDef, GridRenderCellParams } from "@mui/x-data-grid";
 import Button from "@mui/material/Button";
 import type { Customer } from "../types";
 import { deleteCustomer, getCustomers } from "../customerapi";
+import Addcustomer from "./AddCustomer";
+import { TextField } from "@mui/material";
 
 function Customerlist() {
   const [customers, setCustomers] = useState<Customer[]>([]);
+  const [searchCustomer, setSearchCustomer] = useState("");
+
 
 	const fetchCustomers = () => {
 		getCustomers()
 		.then(data => setCustomers(data._embedded.customers))
 		.catch(err => console.error(err))
 	}
+
+  useEffect(() => {
+		fetchCustomers();
+	}, []);
 
 	const handleDelete = (url: string) => {
 		if (window.confirm("Are you sure?")) {
@@ -22,9 +30,21 @@ function Customerlist() {
     }
 	}
 
-  useEffect(() => {
-		fetchCustomers();
-	}, []);
+  // Ajetaan aina kun customers-lista tai filterText muuttuu
+  const filteredCustomers = customers.filter((customers) => {
+    // jos haku on tyhjä
+    if (searchCustomer == "") return true;
+
+    // (case-insensitive)
+    const search = searchCustomer.toLowerCase();
+
+    //Tarkistus
+    return (
+      customers.firstname.toLowerCase().includes(search) ||
+      customers.lastname.toLowerCase().includes(search) ||
+      customers.email.toLowerCase().includes(search)
+    );
+  });
 
 	const columns: GridColDef[] = [
     { field: 'firstname', width: 150, headerName: 'First Name' }, 
@@ -51,9 +71,22 @@ function Customerlist() {
 
 	return (
 	  <>
+      <Addcustomer fetchCustomers={fetchCustomers}/>
+      {/* Hakukenttä ja napit */}
+      <div style={{ marginBottom: 20, display: 'flex', gap: 10, alignItems: 'center' }}>
+        
+        {/* Search input */}
+        <TextField 
+          label="Search customer" 
+          variant="outlined" 
+          size="small"
+          value={searchCustomer}
+          onChange={(e) => setSearchCustomer(e.target.value)} // Päivittää tilaa heti kirjoittaessa
+        />
+      </div>
 			<div style= {{ height: 500, margin: 'auto'}}>
 				<DataGrid
-				rows={customers}
+				rows={filteredCustomers}
 				columns={columns}
 				//muista ID, kun käytetään DataGrid
 				//määritetään uniikkina linkki (listassa jokaisella autolla on oma linkki)

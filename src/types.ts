@@ -36,3 +36,6 @@ export type Training = {
         }
     }
 }
+
+export type CustomerForm = Omit<Customer, "_links">;
+export type TrainingForm = Omit<Training, "_links">;
