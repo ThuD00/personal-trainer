@@ -2,9 +2,10 @@ import { useEffect, useState } from "react";
 import { DataGrid } from '@mui/x-data-grid';
 import type { GridColDef, GridRenderCellParams, GridValueFormatter } from "@mui/x-data-grid";
 import Button from "@mui/material/Button";
-import { deleteTraining, getTrainings, retrieveCustomer } from "../trainingapi";
+import { deleteTraining, getTrainings } from "../trainingapi";
 import type { Training } from "../types";
 import dayjs from "dayjs";
+import { retrieveCustomer } from "../customerapi";
 
 function Trainingsessions() {
 	const [trainings, setTrainings] = useState<Training[]>([]);

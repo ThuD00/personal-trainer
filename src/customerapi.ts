@@ -18,6 +18,15 @@ export function deleteCustomer(url: string) {
     })
 }
 
+export function retrieveCustomer(url: string) {
+  return fetch(url)
+    .then(response => {
+      if (!response.ok)
+        throw new Error("Error when retieving customer: " + response.statusText);
+      return response.json();
+    });
+}
+
 export function saveCustomer(newCustomer: CustomerForm) {
   return fetch(import.meta.env.VITE_API_URL + "/customers", { 
       method: "POST",

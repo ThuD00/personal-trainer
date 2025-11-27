@@ -2,11 +2,13 @@ import { useEffect, useState } from "react";
 import { DataGrid } from '@mui/x-data-grid';
 import type { GridColDef, GridRenderCellParams } from "@mui/x-data-grid";
 import Button from "@mui/material/Button";
-import type { Customer } from "../types";
+import type { Customer, TrainingForm } from "../types";
 import { deleteCustomer, getCustomers } from "../customerapi";
 import Addcustomer from "./AddCustomer";
 import { TextField } from "@mui/material";
 import EditCustomer from "./EditCustomer";
+import AddTraining from "./AddTraining";
+import { saveTraining } from "../trainingapi";
 
 function Customerlist() {
   const [customers, setCustomers] = useState<Customer[]>([]);
@@ -22,6 +24,14 @@ function Customerlist() {
   useEffect(() => {
 		fetchCustomers();
 	}, []);
+
+  const handleSaveTraining = (training: TrainingForm) => {
+    return saveTraining(training)
+    .then(() => {
+      alert("Training added successfully!")
+    })
+    .catch(err => console.error(err))
+  }
 
 	const handleDelete = (url: string) => {
 		if (window.confirm("Are you sure?")) {
@@ -48,6 +58,18 @@ function Customerlist() {
   });
 
 	const columns: GridColDef[] = [
+    {
+      field: 'addTraining',
+      headerName: "",
+      sortable: false,
+      filterable: false,
+      renderCell: (params: GridRenderCellParams) => (
+        <AddTraining 
+          handleSaveTraining={handleSaveTraining} 
+          customerUrl={params.row._links.self.href} 
+        />
+      )
+    },
     { field: 'firstname', width: 150, headerName: 'First Name' }, 
     { field: 'lastname', width: 150, headerName: 'Lastname' }, 
     { field: 'streetaddress', headerName: 'Streetaddress' }, 
