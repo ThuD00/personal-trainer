@@ -9,11 +9,11 @@ import { TextField } from "@mui/material";
 import EditCustomer from "./EditCustomer";
 import AddTraining from "./AddTraining";
 import { saveTraining } from "../trainingapi";
+import ExportCustomersCsv from "./ExportCustomersCsv";
 
 function Customerlist() {
   const [customers, setCustomers] = useState<Customer[]>([]);
   const [searchCustomer, setSearchCustomer] = useState("");
-
 
 	const fetchCustomers = () => {
 		getCustomers()
@@ -59,7 +59,7 @@ function Customerlist() {
 
 	const columns: GridColDef[] = [
     {
-      field: 'addTraining',
+      field: 'AddTraining',
       headerName: "",
       sortable: false,
       filterable: false,
@@ -115,6 +115,7 @@ function Customerlist() {
           onChange={(e) => setSearchCustomer(e.target.value)} // Päivittää tilaa heti kirjoittaessa
         />
       </div>
+
 			<div style= {{ height: 500, margin: 'auto'}}>
 				<DataGrid
 				rows={filteredCustomers}
@@ -126,6 +127,8 @@ function Customerlist() {
 				//pystyy valita riviä/ruutua
 				rowSelection={false}
 				/>
+        
+        <ExportCustomersCsv customers={filteredCustomers} />
       </div>
 	  </>
 	)

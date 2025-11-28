@@ -19,7 +19,7 @@ function Trainingsessions() {
 
       // Haetaan asiakastiedot jokaiseen harjoitukseen
       const fullTrainings = await Promise.all(rawTrainings.map(async (training: Training) => {
-        const customerData = await retrieveCustomer(training._links.customer.href);
+      const customerData = await retrieveCustomer(training._links.customer.href);
         return {
             ...training,
             customer: customerData
@@ -33,6 +33,7 @@ function Trainingsessions() {
 
   // Kutsutaan tätä funktiota sivun latauksessa
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     fetchData();
   }, []);
 
