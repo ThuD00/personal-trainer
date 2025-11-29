@@ -117,7 +117,7 @@ const localizer = dateFnsLocalizer({
 function TrainingCalendar() {
   const [events, setEvents] = useState<CalendarEvent[]>([]);
   const [date, setDate] = useState(new Date());
-  const [view, setView] = useState<View>("week");
+  const [view, setView] = useState<View>("month");
 
   const fetchTrainings = async () => {
     try {
@@ -159,7 +159,7 @@ function TrainingCalendar() {
   }, []);
 
   return (
-    <div style={{ height: "100%", width: "100%", padding: "20px" }}>
+    <div style={{ height: "90vh", width: "100%", padding: "20px" }}>
       <Calendar
         localizer={localizer}
         events={events}
@@ -170,7 +170,7 @@ function TrainingCalendar() {
         startAccessor="start"
         endAccessor="end"
         titleAccessor="title"
-        style={{ height: "80%" }}
+        style={{ height: 600 }}
         dayLayoutAlgorithm="no-overlap"
       />
     </div>
