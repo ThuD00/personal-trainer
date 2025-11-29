@@ -37,5 +37,11 @@ export type Training = {
     }
 }
 
+export type CalendarEvent = {
+    title: string;
+    start: Date;
+    end: Date;
+}
+
 export type CustomerForm = Omit<Customer, "_links">;
 export type TrainingForm = Omit<Training, "_links">;

@@ -19,14 +19,6 @@ export function deleteTraining(url: string) {
     })
 }
 
-export function retrieveCustomer(url: string) {
-  return fetch(url)
-    .then(response => {
-      if (!response.ok)
-        throw new Error("Error when retieving customer: " + response.statusText);
-      return response.json();
-    });
-}
 
 export function saveTraining(newTraining: TrainingForm) {
   return fetch(import.meta.env.VITE_API_URL + "/trainings", { 

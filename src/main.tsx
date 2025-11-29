@@ -1,11 +1,12 @@
 import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.tsx'
-import Customerlist from './components/CustomerList.tsx';
-import Trainingsessions from './components/TrainingSessions.tsx';
 import { createBrowserRouter, RouterProvider } from 'react-router';
 import React from 'react';
 import Home from './Home.tsx';
+import CustomerList from './components/CustomerList.tsx';
+import TrainingSessions from './components/TrainingSessions.tsx';
+import TrainingCalendar from './components/TrainingCalendar.tsx';
 
 const router = createBrowserRouter([  // Import components that are used in routes
   {
@@ -17,13 +18,16 @@ const router = createBrowserRouter([  // Import components that are used in rout
         index: true                   // index route does not need any path
       },
       {
-        path: "Customerlist",                // path can be defined relative to the parent path
-        element: <Customerlist />,
-        index: true                   // index route does not need any path
+        path: "CustomerList",                // path can be defined relative to the parent path
+        element: <CustomerList />,
       },
       {
-        path: "Trainingsessions",
-        element: <Trainingsessions />,
+        path: "TrainingSessions",
+        element: <TrainingSessions />,
+      },
+      {
+        path: "TrainingCalendar",
+        element: <TrainingCalendar />,
       },
     ]
   }
