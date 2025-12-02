@@ -55,7 +55,7 @@ export default function AddTraining({ handleSaveTraining, customerUrl }: AddTrai
 
   return (
     <>
-      <Button variant="outlined" onClick={handleClickOpen}>
+      <Button variant="text" onClick={handleClickOpen}>
         Add Training
       </Button>
       <Dialog open={open} onClose={handleClose}>

@@ -10,6 +10,7 @@ import EditCustomer from "./EditCustomer";
 import AddTraining from "./AddTraining";
 import { saveTraining } from "../trainingapi";
 import ExportCustomersCsv from "./ExportCustomersCsv";
+import DeleteIcon from '@mui/icons-material/Delete';
 
 function Customerlist() {
   const [customers, setCustomers] = useState<Customer[]>([]);
@@ -59,8 +60,32 @@ function Customerlist() {
 
 	const columns: GridColDef[] = [
     {
+      headerName: "",
+      width: 70,
+      //ei haluta suodatusta
+      sortable: false,
+      filterable: false,
+      field: '_links.self.href',
+      //halutaan Delete-nappia sarakkeeseen
+      //renderCell = voi määrittää, miten yksittäinen solun sisältö piirretään (renderöidään)
+      renderCell: (params: GridRenderCellParams) => 
+        <Button color='error' size="small" onClick={() => handleDelete(params.id as string)}>
+          <DeleteIcon/>
+        </Button>
+    },
+    {
+      headerName: "",
+      width: 70,
+      sortable: false,
+      filterable: false,
+      field: '_links.customer.href',
+      renderCell: (params: GridRenderCellParams) =>
+        <EditCustomer fetchCustomer={fetchCustomers} customerRow={params.row} />
+    },
+    {
       field: 'AddTraining',
       headerName: "",
+      width: 150,
       sortable: false,
       filterable: false,
       renderCell: (params: GridRenderCellParams) => (
@@ -70,34 +95,13 @@ function Customerlist() {
         />
       )
     },
-    { field: 'firstname', width: 150, headerName: 'First Name' }, 
-    { field: 'lastname', width: 150, headerName: 'Lastname' }, 
-    { field: 'streetaddress', headerName: 'Streetaddress' }, 
-    { field: 'postcode', headerName: 'Postcode'}, 
-    { field: 'city', headerName: 'City'}, 
-    { field: 'email', headerName: 'Email'},
-	  { field: 'phone', headerName: 'Phone'}, 
-    {
-      headerName: "",
-      //ei haluta suodatusta
-      sortable: false,
-      filterable: false,
-      field: '_links.self.href',
-      //halutaan Delete-nappia sarakkeeseen
-      //renderCell = voi määrittää, miten yksittäinen solun sisältö piirretään (renderöidään)
-      renderCell: (params: GridRenderCellParams) => 
-        <Button color='error' size="small" onClick={() => handleDelete(params.id as string)}>
-          Delete
-        </Button>
-    },
-    {
-      headerName: "",
-      sortable: false,
-      filterable: false,
-      field: '_links.customer.href',
-      renderCell: (params: GridRenderCellParams) =>
-        <EditCustomer fetchCustomer={fetchCustomers} customerRow={params.row} />
-    }
+    { field: 'firstname', width: 120, headerName: 'First Name' }, 
+    { field: 'lastname', width: 100, headerName: 'Lastname' }, 
+    { field: 'streetaddress', width: 150, headerName: 'Streetaddress' }, 
+    { field: 'postcode', width: 100, headerName: 'Postcode'}, 
+    { field: 'city', width: 100, headerName: 'City'}, 
+    { field: 'email', width: 150, headerName: 'Email'},
+	  { field: 'phone', width: 130, headerName: 'Phone'}, 
   ]
 
 	return (

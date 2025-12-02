@@ -6,6 +6,7 @@ import { deleteTraining, getTrainings } from "../trainingapi";
 import type { Training } from "../types";
 import dayjs from "dayjs";
 import { retrieveCustomer } from "../customerapi";
+import DeleteIcon from '@mui/icons-material/Delete';
 
 function Trainingsessions() {
 	const [trainings, setTrainings] = useState<Training[]>([]);
@@ -46,25 +47,6 @@ function Trainingsessions() {
   }
 
 	const columns: GridColDef[] = [
-    { field: 'date', 
-      width: 200, 
-      headerName: 'Date',
-      type: 'dateTime',
-      valueFormatter: ((value) => {
-        //hh = 12-tuntinen kello, HH = 24-tuntinen, mm = minuutit, a = AM/PM
-        return value ? dayjs(value as string).format('DD.MM.YYYY HH:mm a') : '';
-      }) as GridValueFormatter
-    }, 
-    { field: 'duration', width: 150, headerName: 'Duration (min)' }, 
-    { field: 'activity', width: 150, headerName: 'Activity' }, 
-    { 
-      field: 'customer', 
-      width: 150, 
-      headerName: 'Customer',
-      valueGetter: (_, row) => {
-        return row.customer ? row.customer.firstname + ' ' + row.customer.lastname : 'Unknown'; 
-      }
-    }, 
     {
       headerName: "",
       //ei haluta suodatusta
@@ -75,9 +57,28 @@ function Trainingsessions() {
       //renderCell = voi määrittää, miten yksittäinen solun sisältö piirretään (renderöidään)
       renderCell: (params: GridRenderCellParams) => 
         <Button color='error' size="small" onClick={() => handleDetele(params.id as string)}>
-          Delete
+          <DeleteIcon/>
         </Button>
-    	}
+    },
+    { field: 'date', 
+      width: 180, 
+      headerName: 'Date',
+      type: 'dateTime',
+      valueFormatter: ((value) => {
+        //hh = 12-tuntinen kello, HH = 24-tuntinen, mm = minuutit, a = AM/PM
+        return value ? dayjs(value as string).format('DD.MM.YYYY HH:mm a') : '';
+      }) as GridValueFormatter
+    }, 
+    { field: 'duration', width: 120, headerName: 'Duration (min)' }, 
+    { field: 'activity', width: 150, headerName: 'Activity' }, 
+    { 
+      field: 'customer', 
+      width: 180, 
+      headerName: 'Customer',
+      valueGetter: (_, row) => {
+        return row.customer ? row.customer.firstname + ' ' + row.customer.lastname : 'Unknown'; 
+      }
+    }, 
   	]
 
     return (
