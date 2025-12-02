@@ -106,7 +106,6 @@ function Customerlist() {
 
 	return (
 	  <>
-      <Addcustomer fetchCustomers={fetchCustomers}/>
       {/* Hakukenttä ja napit */}
       <div style={{ marginBottom: 20, display: 'flex', gap: 10, alignItems: 'center' }}>
         
@@ -118,6 +117,7 @@ function Customerlist() {
           value={searchCustomer}
           onChange={(e) => setSearchCustomer(e.target.value)} // Päivittää tilaa heti kirjoittaessa
         />
+        <Addcustomer fetchCustomers={fetchCustomers}/>
       </div>
 
 			<div style= {{ height: 500, margin: 'auto'}}>
