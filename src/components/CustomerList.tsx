@@ -118,6 +118,7 @@ function Customerlist() {
           onChange={(e) => setSearchCustomer(e.target.value)} // Päivittää tilaa heti kirjoittaessa
         />
         <Addcustomer fetchCustomers={fetchCustomers}/>
+        <ExportCustomersCsv customers={filteredCustomers} />
       </div>
 
 			<div style={{ height: 500, margin: 'auto'}}>
@@ -132,7 +133,6 @@ function Customerlist() {
 				rowSelection={false}
 				/>
         
-        <ExportCustomersCsv customers={filteredCustomers} />
       </div>
 	  </>
 	)

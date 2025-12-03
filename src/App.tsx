@@ -8,7 +8,7 @@ import Box from '@mui/material/Box'
 import { NavLink, Outlet } from 'react-router'
 import { useState } from 'react'
 import type { Customer } from './types'
-import Reset from './reset'
+//import Reset from './reset'
 
 function App() {
   const [customers, setCustomers] = useState<Customer[]>([]);
@@ -45,7 +45,7 @@ function App() {
 
       <Outlet context={{ customers, setCustomers }} />
 
-      <Reset />
+      {/* <Reset /> */}
       
     </Container>
     </>
