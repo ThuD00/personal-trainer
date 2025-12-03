@@ -17,7 +17,7 @@ type AddTrainingProps = {
   customerUrl: string;
 }
 
-export default function AddTraining({ handleSaveTraining, customerUrl }: AddTrainingProps) {
+function AddTraining({ handleSaveTraining, customerUrl }: AddTrainingProps) {
   const [open, setOpen] = useState(false);
   const [training, setTraining] = useState<TrainingForm>({
     date: "",
@@ -102,3 +102,5 @@ export default function AddTraining({ handleSaveTraining, customerUrl }: AddTrai
     </>
   );
 }
+
+export default AddTraining;

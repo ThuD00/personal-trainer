@@ -8,7 +8,7 @@ import dayjs from "dayjs";
 import { retrieveCustomer } from "../customerapi";
 import DeleteIcon from '@mui/icons-material/Delete';
 
-function Trainingsessions() {
+function TrainingSessions() {
 	const [trainings, setTrainings] = useState<Training[]>([]);
 
   //hakee harjoitukset ja asiakkaat
@@ -24,7 +24,9 @@ function Trainingsessions() {
             ...training,
             customer: customerData
         };
-      }));
+      })
+    );
+    
       setTrainings(fullTrainings);
     } catch (err) {
       console.log(err);
@@ -33,17 +35,17 @@ function Trainingsessions() {
 
   // Kutsutaan tätä funktiota sivun latauksessa
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
+    //eslint-disable-next-line react-hooks/set-state-in-effect
     fetchData();
   }, []);
 
-  const handleDetele = (url: string) => {
-    if (window.confirm("Are you sure?")) {
+  const handleDelete = (url: string) => {
+    if (window.confirm("Are you sure you want to delete this training session?")) {
     deleteTraining(url)
     .then(() => fetchData())
     .catch(err => console.error(err))
     }
-  }
+  };
 
 	const columns: GridColDef[] = [
     {
@@ -56,7 +58,11 @@ function Trainingsessions() {
       //halutaan Delete-nappia sarakkeeseen
       //renderCell = voi määrittää, miten yksittäinen solun sisältö piirretään (renderöidään)
       renderCell: (params: GridRenderCellParams) => 
-        <Button color='error' size="small" onClick={() => handleDetele(params.id as string)}>
+        <Button 
+          color='error' 
+          size="small" 
+          onClick={() => handleDelete(params.id as string)}
+        >
           <DeleteIcon/>
         </Button>
     },
@@ -76,28 +82,26 @@ function Trainingsessions() {
       width: 180, 
       headerName: 'Customer',
       valueGetter: (_, row) => {
-        return row.customer ? row.customer.firstname + ' ' + row.customer.lastname : 'Unknown'; 
+        return row.customer ? row.customer.firstname 
+        + ' ' + row.customer.lastname : 'Unknown'; 
       }
     }, 
-  	]
+  ];
 
     return (
-			<>
 				<div style={{ height: 500, margin: 'auto'}}>
 					<DataGrid
-					rows={trainings}
-					columns={columns}
-					//muista ID, kun käytetään DataGrid
-					//määritetään uniikkina linkki (listassa jokaisella autolla on oma linkki)
-					getRowId={row => row._links.self.href}
-					autoPageSize
-					//pystyy valita riviä/ruutua
-					rowSelection={false}
+            rows={trainings}
+            columns={columns}
+            //muista ID, kun käytetään DataGrid
+            //määritetään uniikkina linkki (listassa jokaisella autolla on oma linkki)
+            getRowId={row => row._links.self.href}
+            autoPageSize
+            //pystyy valita riviä/ruutua
+            rowSelection={false}
 					/>
       	</div>
-			</>
-    )
-
+    );
 }
 
-export default Trainingsessions;
+export default TrainingSessions;
