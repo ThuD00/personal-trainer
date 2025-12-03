@@ -12,7 +12,7 @@ type AddCustomerProps = {
   fetchCustomers: () => void;
 }
 
-export default function Addcustomer({ fetchCustomers }: AddCustomerProps) {
+function AddCustomer({ fetchCustomers }: AddCustomerProps) {
   const [open, setOpen] = useState(false);
   const [customer, setCustomer] = useState<CustomerForm>({
     firstname: "",
@@ -137,3 +137,5 @@ export default function Addcustomer({ fetchCustomers }: AddCustomerProps) {
     </>
   );
 }
+
+export default AddCustomer;

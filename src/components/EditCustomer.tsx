@@ -9,11 +9,11 @@ import type { CustomerForm, Customer } from '../types';
 import EditIcon from '@mui/icons-material/Edit'
 
 type EditCustomerProps = {
-  fetchCustomer: () => void;
+  refreshCustomer: () => void;
   customerRow: Customer;
 }
 
-export default function EditCar({ fetchCustomer, customerRow }: EditCustomerProps) {
+function EditCustomer({ refreshCustomer, customerRow }: EditCustomerProps) {
   const [open, setOpen] = useState(false);
   const [customer, setCustomer] = useState<CustomerForm>({
     firstname: "",
@@ -69,7 +69,7 @@ export default function EditCar({ fetchCustomer, customerRow }: EditCustomerProp
       return response.json();
     })
     .then(() => { 
-      fetchCustomer();
+      refreshCustomer();
       handleClose(); 
     })
     .catch(err => console.error(err))
@@ -151,3 +151,5 @@ export default function EditCar({ fetchCustomer, customerRow }: EditCustomerProp
     </>
   );
 }
+
+export default EditCustomer;
