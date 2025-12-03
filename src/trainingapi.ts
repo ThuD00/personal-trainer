@@ -28,7 +28,7 @@ export function saveTraining(newTraining: TrainingForm) {
     }) 
     .then(response => {
       if (!response.ok)
-        throw new Error("Error when adding new customer: " + response.statusText);
+        throw new Error("Error when adding new training: " + response.statusText);
       response.json();
     })
 }
