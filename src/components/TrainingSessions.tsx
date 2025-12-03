@@ -26,7 +26,6 @@ function TrainingSessions() {
         };
       })
     );
-    
       setTrainings(fullTrainings);
     } catch (err) {
       console.log(err);

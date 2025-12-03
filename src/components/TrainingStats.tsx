@@ -19,7 +19,8 @@ import {
 function TrainingStats() {
   const [stats, setStats] = useState<ActivityStat[]>([]);
 
-  const fetchData = async () => {
+  useEffect(() => {
+    const fetchData = async () => {
       try {
         const data = await getTrainings();
         const rawTrainings = data._embedded.trainings;
@@ -37,12 +38,9 @@ function TrainingStats() {
         console.log(err);
       }
     };
-  
-    // Kutsutaan tätä funktiota sivun latauksessa
-    useEffect(() => {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      fetchData();
-    }, []);
+
+    fetchData();
+  }, []);
 
   return (
       <Paper>

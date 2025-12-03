@@ -25,42 +25,41 @@ function TrainingCalendar() {
   const [date, setDate] = useState(new Date());
   const [view, setView] = useState<View>("month");
 
-  const fetchTrainings = async () => {
-    try {
-      const data = await getTrainings();
-      const trainings: Training[] = data._embedded.trainings;
-
-      // Haetaan jokaiselle treenille myös asiakastiedot
-      const TrainingEvents: CalendarEvent[] = await Promise.all(
-        trainings.map(async (t: Training) => {
-          let customerName = "Unknown customer";
-
-          try {
-            const customer = await retrieveCustomer(t._links.customer.href);
-            customerName = `${customer.firstname} ${customer.lastname}`;
-          } catch (err) {
-            console.error("Error fetching customer for training", err);
-          }
-
-          const start = new Date(t.date);
-          const end = new Date(start.getTime() + t.duration * 60000); // duration minuutteina
-
-          return {
-            title: `${t.activity}/${customerName}`,
-            start,
-            end,
-          };
-        })
-      );
-
-      setEvents(TrainingEvents);
-    } catch (err) {
-      console.error(err);
-    }
-  };
-
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
+    const fetchTrainings = async () => {
+      try {
+        const data = await getTrainings();
+        const trainings: Training[] = data._embedded.trainings;
+
+        // Haetaan jokaiselle treenille myös asiakastiedot
+        const TrainingEvents: CalendarEvent[] = await Promise.all(
+          trainings.map(async (t: Training) => {
+            let customerName = "Unknown customer";
+
+            try {
+              const customer = await retrieveCustomer(t._links.customer.href);
+              customerName = `${customer.firstname} ${customer.lastname}`;
+            } catch (err) {
+              console.error("Error fetching customer for training", err);
+            }
+
+            const start = new Date(t.date);
+            const end = new Date(start.getTime() + t.duration * 60000); // duration minuutteina
+
+            return {
+              title: `${t.activity}/${customerName}`,
+              start,
+              end,
+            };
+          })
+        );
+
+        setEvents(TrainingEvents);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
     fetchTrainings();
   }, []);
 
