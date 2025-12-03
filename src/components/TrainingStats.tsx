@@ -17,7 +17,7 @@ import {
 
 
 function TrainingStats() {
-  const [data, setData] = useState<ActivityStat[]>([]);
+  const [stats, setStats] = useState<ActivityStat[]>([]);
 
   const fetchData = async () => {
       try {
@@ -32,7 +32,7 @@ function TrainingStats() {
           totalMinutes: sumBy(grouped[activity], "duration"),
         }));
 
-        setData(stats);
+        setStats(stats);
       } catch (err) {
         console.log(err);
       }
@@ -53,7 +53,7 @@ function TrainingStats() {
         <div style={{ width: "100%", height: 400 }}>
           <ResponsiveContainer width="100%" height="100%">
             <BarChart 
-              data={data} 
+              data={stats} 
               margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
             >
               <CartesianGrid strokeDasharray="3 3" />
