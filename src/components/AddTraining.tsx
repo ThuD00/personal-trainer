@@ -60,7 +60,7 @@ export default function AddTraining({ handleSaveTraining, customerUrl }: AddTrai
         <AddIcon />
       </Button>
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Add Training</DialogTitle>
+        <DialogTitle>Add new Training</DialogTitle>
         <DialogContent>
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <DateTimePicker
