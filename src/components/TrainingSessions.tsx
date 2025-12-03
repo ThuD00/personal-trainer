@@ -14,7 +14,6 @@ function Trainingsessions() {
   //hakee harjoitukset ja asiakkaat
   const fetchData = async () => {
     try {
-      console.log("fetchData")
       const data = await getTrainings();
       const rawTrainings = data._embedded.trainings;
 
@@ -83,7 +82,7 @@ function Trainingsessions() {
 
     return (
 			<>
-				<div style= {{ height: 500, margin: 'auto'}}>
+				<div style={{ height: 500, margin: 'auto'}}>
 					<DataGrid
 					rows={trainings}
 					columns={columns}

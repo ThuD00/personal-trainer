@@ -40,6 +40,7 @@ function App() {
         <NavLink to={"/CustomerList"}>Customer List</NavLink>
         <NavLink to={"/TrainingSessions"}>Training Sessions</NavLink>
         <NavLink to={"/TrainingCalendar"}>Calendar</NavLink>
+        <NavLink to={"/TrainingStats"}>Chart</NavLink>
       </Box>
 
       <Outlet context={{ customers, setCustomers }} />

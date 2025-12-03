@@ -7,6 +7,7 @@ import Home from './Home.tsx';
 import CustomerList from './components/CustomerList.tsx';
 import TrainingSessions from './components/TrainingSessions.tsx';
 import TrainingCalendar from './components/TrainingCalendar.tsx';
+import TrainingStats from './components/TrainingStats.tsx';
 
 const router = createBrowserRouter([  // Import components that are used in routes
   {
@@ -28,6 +29,10 @@ const router = createBrowserRouter([  // Import components that are used in rout
       {
         path: "TrainingCalendar",
         element: <TrainingCalendar />,
+      },
+      {
+        path: "TrainingStats",
+        element: <TrainingStats />,
       },
     ]
   }

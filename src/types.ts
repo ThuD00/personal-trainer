@@ -43,5 +43,10 @@ export type CalendarEvent = {
     end: Date;
 }
 
+export type ActivityStat = {
+    activity: string;
+    totalMinutes: number;
+}
+
 export type CustomerForm = Omit<Customer, "_links">;
 export type TrainingForm = Omit<Training, "_links">;

@@ -120,7 +120,7 @@ function Customerlist() {
         <Addcustomer fetchCustomers={fetchCustomers}/>
       </div>
 
-			<div style= {{ height: 500, margin: 'auto'}}>
+			<div style={{ height: 500, margin: 'auto'}}>
 				<DataGrid
 				rows={filteredCustomers}
 				columns={columns}
