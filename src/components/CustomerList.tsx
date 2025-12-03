@@ -53,8 +53,7 @@ function Customerlist() {
     //Tarkistus
     return (
       customers.firstname.toLowerCase().includes(search) ||
-      customers.lastname.toLowerCase().includes(search) ||
-      customers.email.toLowerCase().includes(search)
+      customers.lastname.toLowerCase().includes(search)
     );
   });
 
