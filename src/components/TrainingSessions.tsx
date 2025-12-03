@@ -47,7 +47,8 @@ function Trainingsessions() {
 
 	const columns: GridColDef[] = [
     {
-      headerName: "",
+      headerName: "Action",
+      width: 75,
       //ei haluta suodatusta
       sortable: false,
       filterable: false,
@@ -62,7 +63,7 @@ function Trainingsessions() {
     { field: 'date', 
       width: 180, 
       headerName: 'Date',
-      type: 'dateTime',
+      type: 'date',
       valueFormatter: ((value) => {
         //hh = 12-tuntinen kello, HH = 24-tuntinen, mm = minuutit, a = AM/PM
         return value ? dayjs(value as string).format('DD.MM.YYYY HH:mm a') : '';
