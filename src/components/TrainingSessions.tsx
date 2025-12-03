@@ -47,7 +47,7 @@ function Trainingsessions() {
 
 	const columns: GridColDef[] = [
     {
-      headerName: "Action",
+      headerName: "Delete",
       width: 75,
       //ei haluta suodatusta
       sortable: false,
