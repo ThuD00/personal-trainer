@@ -60,8 +60,8 @@ function Customerlist() {
 
 	const columns: GridColDef[] = [
     {
-      headerName: "",
-      width: 70,
+      headerName: "Delete",
+      width: 60,
       //ei haluta suodatusta
       sortable: false,
       filterable: false,
@@ -74,8 +74,8 @@ function Customerlist() {
         </Button>
     },
     {
-      headerName: "",
-      width: 70,
+      headerName: "Edit",
+      width: 60,
       sortable: false,
       filterable: false,
       field: '_links.customer.href',
@@ -84,8 +84,8 @@ function Customerlist() {
     },
     {
       field: 'AddTraining',
-      headerName: "",
-      width: 150,
+      headerName: "Add Training",
+      width: 100,
       sortable: false,
       filterable: false,
       renderCell: (params: GridRenderCellParams) => (

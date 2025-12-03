@@ -10,6 +10,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import dayjs from 'dayjs';
+import AddIcon from '@mui/icons-material/Add';
 
 type AddTrainingProps = {
   handleSaveTraining: (t: TrainingForm) => Promise<void>;
@@ -56,7 +57,7 @@ export default function AddTraining({ handleSaveTraining, customerUrl }: AddTrai
   return (
     <>
       <Button variant="text" onClick={handleClickOpen}>
-        Add Training
+        <AddIcon />
       </Button>
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Add Training</DialogTitle>
